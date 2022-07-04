@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-  <title>Cui Ziteng</title>
+  <title>Ziteng Cui</title>
   
-  <meta name="author" content="Cui Ziteng">
+  <meta name="author" content="Ziteng Cui">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
@@ -41,58 +41,14 @@
             <td style="padding:20px;width:100%;vertical-align:middle">
               <heading>Selected Publications</heading>
               <p>
-                I'm interested in low-level vision, robustness and self-supervised learning. Representative papers are <span class="highlight">highlighted</span>.
+                I'm interested in low-level vision, vision robustness, self-supervised learning and physics modeling. 
               </p>
             </td>
           </tr>
         </tbody></table>
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
 
-
-          <tr onmouseout="rawnerf_stop()" onmouseover="rawnerf_start()">
-            <td style="padding:20px;width:25%;vertical-align:middle">
-              <div class="one">
-                <div class="two" id='rawnerf_image'><video  width=100% height=100% muted autoplay loop>
-                <source src="images/rawnerf.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-                </video></div>
-                <img src='images/rawnerf.jpg' width="160">
-              </div>
-              <script type="text/javascript">
-                function rawnerf_start() {
-                  document.getElementById('rawnerf_image').style.opacity = "1";
-                }
-
-                function rawnerf_stop() {
-                  document.getElementById('rawnerf_image').style.opacity = "0";
-                }
-                rawnerf_stop()
-              </script>
-            </td>
-            <td style="padding:20px;width:75%;vertical-align:middle">
-              <a href="https://bmild.github.io/rawnerf/index.html">
-                <papertitle>NeRF in the Dark: High Dynamic Range View Synthesis from Noisy Raw Images</papertitle>
-              </a>
-              <br>
-              <a href="https://bmild.github.io/">Ben Mildenhall</a>,
-              <a href="https://phogzone.com/">Peter Hedman</a>,
-              <a href="http://www.ricardomartinbrualla.com/">Ricardo Martin-Brualla</a>, <br>
-              <a href="https://pratulsrinivasan.github.io/">Pratul Srinivasan</a>,
-              <strong>Jonathan T. Barron</strong>
-              <br>
-							<em>CVPR</em>, 2022 &nbsp <font color="red"><strong>(Oral Presentation)</strong></font>
-              <br>
-              <a href="https://bmild.github.io/rawnerf/index.html">project page</a>
-        /
-              <a href="https://arxiv.org/abs/2111.13679">arXiv</a>
-        /
-              <a href="https://www.youtube.com/watch?v=JtBS4KBcKVc">video</a>
-              <p></p>
-              <p>
-								Properly training NeRF on raw camera data enables HDR view synthesis and bokeh, and outperforms multi-image denoising.</p>
-            </td>
-          </tr> 
-					
+		
 
           <tr onmouseout="motionblur_stop()" onmouseover="motionblur_start()">
             <td style="padding:20px;width:25%;vertical-align:middle">
@@ -113,19 +69,17 @@
             </td>
             <td style="padding:20px;width:75%;vertical-align:middle">
               <a href="https://drive.google.com/file/d/1hWpA4f6iLVcOkZI3zEAAWKARSQhnVgbY/view?usp=sharing">
-                <papertitle>Learning to Synthesize Motion Blur</papertitle>
+                <papertitle>Multitask AET with Orthogonal Tangent Regularity for Dark Object Detection</papertitle>
               </a>
               <br>
-              <a href="http://timothybrooks.com/">Tim Brooks</a>,
-              <strong>Jonathan T. Barron</strong>
+              <strong>Ziteng Cui</strong>
+	      <a>Guo-Jun Qi</a>,
+	      <a>Lin Gu</a>, <a>Shaodi You</a>,  <a>Zenghui Zhang</a>, <a>Tatsuya Harada</a>,
               <br>
-              <em>CVPR</em>, 2019 &nbsp <font color="red"><strong>(Oral Presentation)</strong></font>
+              <em>ICCV</em>, 2021 &nbsp 
               <br>
-              <a href="https://arxiv.org/abs/1811.11745">arxiv</a> /
-              <a href="https://drive.google.com/file/d/1dUQwBMmQdYYIP0zHR_nDQY-uQbaMdcSN/view?usp=sharing">supplement</a> /
-              <a href="http://timothybrooks.com/tech/motion-blur/">project page</a> /
-              <a href="https://www.youtube.com/watch?v=8T1jjSz-2V8">video</a> /
-              <a href="https://github.com/google-research/google-research/tree/master/motion_blur">code</a> / 
+              <a href="https://arxiv.org/abs/2205.03346">arxiv</a> /
+              <a href="https://github.com/cuiziteng/ICCV_MAET">code</a> / 
               <a href="data/BrooksBarronCVPR2019.bib">bibtex</a>
               <p></p>
               <p>Frame interpolation techniques can be used to train a network that directly synthesizes linear blur kernels.</p>
