@@ -41,13 +41,53 @@
             <td style="padding:20px;width:100%;vertical-align:middle">
               <heading>Selected Publications</heading>
               <p>
-                I'm now interested in 3D physics modeling of low-level tasks and camera image signal processor (ISP). 
+                I'm now interested in physics modeling of low-level tasks and camera image signal processor (ISP). 
               </p>
             </td>
           </tr>
         </tbody></table>
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+	
 		
+	<tr onmouseout="aleth_stop()" onmouseover="aleth_start()">
+            <td style="padding:20px;width:25%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='aleth_image'><video  width="170" height="140">
+      <source src="images/shrub_aleth.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+      </video></div>
+                <img src='images/show_aleth.png' width="170" height="140">
+              </div>
+              <script type="text/javascript">
+                function aleth_start() {
+                  document.getElementById('aleth_image').style.opacity = "1";
+                }
+
+                function aleth_stop() {
+                  document.getElementById('aleth_image').style.opacity = "0";
+                }
+                dt_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:75%;vertical-align:middle">
+              <a href="https://arxiv.org/pdf/2303.05807.pdf">
+                <papertitle>You Only Need 90K Parameters to Adapt Light: A Light Weight Transformer for Image Enhancement and Exposure Correction</papertitle>
+              </a>
+              <br>
+              <strong>Ziteng Cui</strong>,
+	      Lin Gu, Xiao Sun, Yu Qiao, Tatsuya Harada.
+              <br>
+              <em>Arxiv</em>, 2023 &nbsp 
+              <br>
+	      <a href="https://cuiziteng.github.io/Aleth_NeRF_web/">website</a> /
+              <a href="https://arxiv.org/abs/2303.05807">arxiv</a> /
+              <a href="https://github.com/cuiziteng/Aelth-NeRF">code</a> /
+	      <a href="data/Aleth-NeRF.bib">bibtex</a> 
+              <p></p>
+              <p>Mimic NeRF's volume rendering function with concealing fields, to handle multi-view unsupervised low-light enhancement.</p>
+            </td>
+          </tr>	
+	
 	<tr onmouseout="fair_stop()" onmouseover="fair_start()">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <div class="one">
