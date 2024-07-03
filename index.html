@@ -20,10 +20,10 @@
               <p style="text-align:center">
                 <name>Ziteng Cui (崔子藤)</name>
               </p>
-              <p> I'm a Ph.D. student at The University of Tokyo, where I am supervised by Prof. Tatsuya Harada. Before that, I received my master's degree from Shanghai Jiao Tong University and my bachelor's degree from Harbin Institute of Technology.
+              <p> I'm a Ph.D. student at The University of Tokyo, where I am fortunate to be supervised by Prof. Tatsuya Harada. Before that, I received my master's degree from Shanghai Jiao Tong University.
 	      </p>
               <p>
-              I mainly work on Computational Photography, Vision Robustness, and Vision Fairness.
+              I mainly work on Computational Photography & Vision Robustness & 3D Computer Vision. My favorite things are DOTA2, hiking, JOJO (Jolyne Cujoh) and Pink Floyd.
 	      </p>
 	
               <p style="text-align:center">
@@ -43,13 +43,49 @@
             <td style="padding:20px;width:100%;vertical-align:middle">
               <heading>Selected Publications</heading>
               <p>
-                I'm now interested in the physics modeling of low-level tasks, and also interested in the neural radiance field. "*" means authors contribute equally.
+                I'm now interested in the physics modeling of low-level vision and 3D computer vision, I especially interested in the neural radiance field. "*" means authors contribute equally.
               </p>
             </td>
           </tr>
         </tbody></table>
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
 	
+<tr onmouseout="ra_stop()" onmouseover="ra_start()">
+            <td style="padding:20px;width:25%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='fair_image'><img src='images/RA_After.jpg' width="170", height="140"></div>
+                <img src='images/RA_Before.jpg' width="170", height="140">
+              </div>
+              <script type="text/javascript">
+                function aleth_start() {
+                  document.getElementById('raw_adapter').style.opacity = "1";
+                }
+
+                function aleth_stop() {
+                  document.getElementById('raw_adapter').style.opacity = "0";
+                }
+                aleth_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:75%;vertical-align:middle">
+              <a href="">
+                <papertitle>RAW-Adapter: Adapting Pre-trained Visual Model to Camera RAW Images</papertitle>
+              </a>
+              <br>
+              <strong>Ziteng Cui</strong>, Tatsuya Harada.
+              <br>
+              <em>ECCV</em>, 2024 &nbsp [<a href="",  target="_blank">github</a>]  <img alt="GitHub stars" style="vertical-align:middle" src="">
+              <br>
+		    
+	      <a href="/">website</a> /
+              <a href="">arxiv</a> /	    
+	      <a href="">bibtex</a>/
+	      <a href="">poster</a> 	    
+              <p></p>
+              <p>We analyze the relationship between camera RAW data and sRGB images pre-trained weights, and propose RAW-Adapter for effectively RAW data tuning.</p>
+            </td>
+          </tr>	
+
 		
 	<tr onmouseout="aleth_stop()" onmouseover="aleth_start()">
             <td style="padding:20px;width:25%;vertical-align:middle">
@@ -91,7 +127,9 @@
               <p>Blight NeRF's volume rendering function with concealing fields, to handle novel view synthesis under low-light conditions and over-exposure conditions.</p>
             </td>
           </tr>	
-	
+
+
+
 	<tr onmouseout="fair_stop()" onmouseover="fair_start()">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <div class="one">
@@ -258,7 +296,7 @@
         <table width="100%" align="center" border="0" cellpadding="20"><tbody>
 	
 	<tr>
-	<a>Reviewer: ICCV, CVPR, ECCV, ICML, NIPS, BMVC, ACCV, TCSVT, Displays</a>
+	<a>Reviewer: ICCV, CVPR, ECCV, ICML, NIPS, BMVC, ACCV, Pacific Graphics</a>
 	</tr>
 	
 					
