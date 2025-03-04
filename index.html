@@ -62,8 +62,47 @@
           </tr>
         </tbody></table>
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+	
 
+		<tr onmouseout="CVPR25_stop()" onmouseover="CVPR25_start()">
+            <td style="padding:20px;width:25%;vertical-align:middle">
+              <div class="one">
+                <div class="two" id='CVPR25'><video  width="170", height="140" muted autoplay loop>
+      			<source src="images/CVPR25_after.mp4" type="video/mp4">
+      		</video></div>
+                <img src='images/CVPR25_before.png' width="170", height="140">
+              </div>
+              <script type="text/javascript">
+                function CVPR25_start() {
+                  document.getElementById('CVPR25').style.opacity = "1";
+                }
 
+                function CVPR25_stop() {
+                  document.getElementById('CVPR25').style.opacity = "0";
+                }
+                CVPR25_stop()
+              </script>
+            </td>
+            <td style="padding:20px;width:75%;vertical-align:middle">
+              <a href="">
+                <papertitle>Luminance-GS: Adapting 3D Gaussian Splatting to Challenging Lighting Conditions with View-Adaptive Curve Adjustment</papertitle>
+              </a>
+              <br>
+              <strong>Ziteng Cui</strong>, Xuangeng Chu, Tatsuya Harada.
+              <br>
+              <em>CVPR</em>, 2025 &nbsp [<a href="",  target="_blank">github</a>]  <img alt="GitHub stars" style="vertical-align:middle" src="">
+              <br>
+		    
+	      <a href="">website</a> /
+              <a href="">arxiv</a> /	    
+	      <a href="">bibtex</a> /
+	      <a href="">poster</a> 	    
+              <p></p>
+              <p>A simple multi-view curve adjustment method, to handle novel view synthesis under different chanlleging lighting conditions (low-light, overexposure, varying exposure).</p>
+            </td>
+          </tr>	
+
+		
 	<tr>
             <td style="padding:20px;width:25%;vertical-align:middle">
               <img src="images/bmvc24.png" alt="BMVC24" width="170", height="140">
