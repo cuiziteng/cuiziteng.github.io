@@ -91,7 +91,11 @@
             <tr>
             <td style="padding:20px;width:100%;vertical-align:middle">
 		    
-              <heading>Selected Publications</heading>
+              <heading>Publications</heading>
+			<p style="margin-top:4px">
+			  (<a id="link-show-selected" href="javascript:toggle_selected()">show selected</a>
+			  / <a id="link-show-all" href="javascript:toggle_all()">show all</a>)
+			</p>
               <p>
                 I'm now interested in the physics modeling of low-level vision and 3D computer vision, I especially interested in the neural radiance field. "*" means authors contribute equally. "#" means corresponding author.
 		      Full publication list please refer to <a href="https://scholar.google.co.id/citations?user=niXIRXgAAAAJ&hl=id">here</a>.  
@@ -102,7 +106,7 @@
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
 
 
-		<tr>
+		<tr class="paper highlight">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <img src="images/RealX3D_logo.png" alt="RealX3D" width="170", height="120">
             </td>
@@ -121,7 +125,7 @@
 			</td>
           </tr>
 
-		<tr>
+		<tr class="paper">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <img src="images/M3A.png" alt="M3A" width="170", height="120">
             </td>
@@ -140,7 +144,7 @@
 			</td>
           </tr>
 			
-		<tr>
+		<tr class="paper">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <img src="images/MERIT.png" alt="MERIT" width="170", height="120">
             </td>
@@ -159,7 +163,7 @@
 			</td>
           </tr>
 
-<tr onmouseout="wacv_stop()" onmouseover="wacv_start()">
+<tr class="paper" onmouseout="wacv_stop()" onmouseover="wacv_start()">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <div class="one">
                 <div class="two" id='wacv'>
@@ -193,7 +197,7 @@
             </td>
           </tr>				
 
-		<tr>
+		<tr class="paper">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <img src="images/NIPS_DRRAW.png" alt="NIPS_DRRAW" width="170", height="120">
             </td>
@@ -213,7 +217,7 @@
 			</td>
           </tr>
 			
-		<tr>
+		<tr class="paper highlight">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <img src="images/NIPS_I2NeRF.png" alt="NIPS_I2NeRF" width="170", height="120">
             </td>
@@ -237,7 +241,7 @@
 
 			
 		
-		<tr onmouseout="CVPR25_stop()" onmouseover="CVPR25_start()">
+		<tr class="paper highlight" onmouseout="CVPR25_stop()" onmouseover="CVPR25_start()">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <div class="one">
                 <div class="two" id='CVPR25'><video  width="170", height="140" muted autoplay loop>
@@ -276,7 +280,7 @@
           </tr>	
 
 
-<tr>
+<tr class="paper">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <img src="images/ARTalk.jpg" alt="ARTalk" width="170", height="140">
             </td>
@@ -297,28 +301,9 @@
             </td>
           </tr>
 		
-<!-- 	<tr>
-            <td style="padding:20px;width:25%;vertical-align:middle">
-              <img src="images/robustness.png" alt="RAW-Adapter_J" width="170", height="140">
-            </td>
-            <td style="padding:20px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/abs/2503.17027">
-                <papertitle>RAW-Adapter: Adapting Pre-trained Visual Model to Camera RAW Images and A Benchmark</papertitle>
-              </a>
-              <br>
-              <strong>Ziteng Cui</strong>, Jianfei Yang, Tatsuya Harada.
-              <br>
-              <em>Arxiv</em>, 2025 &nbsp [<a href="https://github.com/cuiziteng/ECCV_RAW_Adapter",  target="_blank">github</a>]  <img alt="GitHub stars" style="vertical-align:middle" src="https://img.shields.io/github/stars/cuiziteng/ECCV_RAW_Adapter">
-              <br>
-              <a href="https://arxiv.org/abs/2503.17027">arxiv</a> /
-	      <a href="https://raw.githubusercontent.com/cuiziteng/cuiziteng.github.io/master/data/RAW_Adapter_J.bib">bibtex</a>
-              <p></p>
-              <p>Extension of RAW-Adapter (ECCV 2024), we additionally propose RAW-Bench, which incorporates 17 types of RAW-based common corruptions.</p>
-            </td>
-          </tr> -->
 
 		
-	<tr>
+	<tr class="paper">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <img src="images/bmvc24.png" alt="BMVC24" width="170", height="140">
             </td>
@@ -338,7 +323,7 @@
             </td>
           </tr>
 		
-	<tr onmouseout="ra_stop()" onmouseover="ra_start()">
+	<tr class="paper highlight" onmouseout="ra_stop()" onmouseover="ra_start()">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <div class="one">
                 <div class="two" id='raw_adapter'>
@@ -377,7 +362,7 @@
           </tr>	
 
 		
-	<tr onmouseout="aleth_stop()" onmouseover="aleth_start()">
+	<tr class="paper highlight" onmouseout="aleth_stop()" onmouseover="aleth_start()">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <div class="one">
                 <div class="two" id='aleth_image'><video  width="170", height="140" muted autoplay loop>
@@ -418,7 +403,7 @@
             </td>
           </tr>	
 
-	<tr>
+	<tr class="paper">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <img src="images/iccv23.png" alt="ICCV23" width="170", height="140">
             </td>
@@ -440,7 +425,7 @@
             </td>
           </tr>
 		
-	  <tr onmouseout="dt_stop()" onmouseover="dt_start()">
+	  <tr class="paper highlight" onmouseout="dt_stop()" onmouseover="dt_start()">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <div class="one">
                 <div class="two" id='dt_image'><img src='images/BMVC22_result.png' width="170", height="140"></div>
@@ -478,7 +463,7 @@
             </td>
           </tr>
 	
-	  <tr>
+	  <tr class="paper">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <img src="images/ECCV_AERIS.jpg" alt="ECCV_Restoredet" width="170", height="140">
             </td>
@@ -505,7 +490,7 @@
 		
 	 
 
-          <tr>
+          <tr class="paper">
             <td style="padding:20px;width:25%;vertical-align:middle">
               <img src="images/low_after.png" alt="ICCV_MAET" width="170", height="140">
             </td>
@@ -598,6 +583,33 @@
       </td>
     </tr>
   </table>
+<style>
+  tr.paper { display: table-row; }
+  tr.paper.hidden { display: none; }
+  #link-show-selected { font-weight: bold; }
+  #link-show-all { font-weight: normal; }
+</style>
+
+<script>
+  function toggle_selected() {
+    document.querySelectorAll("tr.paper:not(.highlight)").forEach(function(el) {
+      el.classList.add("hidden");
+    });
+    document.getElementById("link-show-selected").style.fontWeight = "bold";
+    document.getElementById("link-show-all").style.fontWeight = "normal";
+  }
+
+  function toggle_all() {
+    document.querySelectorAll("tr.paper").forEach(function(el) {
+      el.classList.remove("hidden");
+    });
+    document.getElementById("link-show-selected").style.fontWeight = "normal";
+    document.getElementById("link-show-all").style.fontWeight = "bold";
+  }
+
+  window.onload = function() { toggle_selected(); };
+</script>
+
 </body>
 
 </html>
