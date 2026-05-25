@@ -100,10 +100,42 @@
     max-width: 820px;
   }
   .hero-title em { font-style: normal; color: var(--accent); }
-  .hero-sub {
-    margin-top: 1.75rem; font-size: 1.05rem; color: var(--muted);
-    max-width: 540px; position: relative; z-index: 1; line-height: 1.8;
+
+  /* ── HERO SUB ROW (two-column layout) ── */
+  .hero-sub-row {
+    display: flex;
+    gap: 3rem;
+    max-width: 900px;
+    position: relative;
+    z-index: 1;
+    margin-top: 1.75rem;
+    align-items: flex-start;
   }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--muted);
+    line-height: 1.8;
+    flex: 1;
+    margin: 0;
+  }
+  .hero-sub-mono {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--muted);
+    line-height: 2;
+    flex: 1;
+    border-left: 1px solid var(--border);
+    padding-left: 2rem;
+  }
+  @media (max-width: 900px) {
+    .hero-sub-row { flex-direction: column; gap: 1.25rem; }
+    .hero-sub-mono {
+      border-left: none; padding-left: 0;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+    }
+  }
+
   .hero-ctas {
     margin-top: 2.5rem; display: flex; gap: 1rem; position: relative; z-index: 1;
   }
@@ -329,21 +361,25 @@
   <h1 class="hero-title">
     RAW Lab<br><em>@ HKUST-GZ</em>
   </h1>
-  <p class="hero-sub">
-  We sit at the intersection of <strong>physics-based vision</strong>,
-  <strong>computational photography</strong>, and <strong>physical AI</strong> —
-  building systems that perceive, reconstruct, and interact with
-  the physical world grounded in the principles of light and imaging.
-  <br><br>
-  <span style="font-family:'DM Mono',monospace;font-size:0.78rem;color:#7a7872;line-height:2;">
-    <span style="color:#c8a96e">RAW</span> is three things at once:
-    the unprocessed signal straight from the camera sensor,
-    <em>Robust AI in the Wild</em>, and — in the spirit of our research —
-    <span style="color:#c8a96e">本质</span>,
-    the Chinese word for essence.
-    We study the world as it truly is, before any approximation is made.
-  </span>
-</p>
+
+  <!-- Two-column subtitle row -->
+  <div class="hero-sub-row">
+    <p class="hero-sub">
+      We sit at the intersection of <strong>physics-based vision</strong>,
+      <strong>computational photography</strong>, and <strong>physical AI</strong> —
+      building systems that perceive, reconstruct, and interact with
+      the physical world grounded in the principles of light and imaging.
+    </p>
+    <p class="hero-sub hero-sub-mono">
+      <span style="color:#c8a96e">RAW</span> is three things at once:
+      the unprocessed signal straight from the camera sensor,
+      <em>Robust AI in the Wild</em>, and — in the spirit of our research —
+      <span style="color:#c8a96e">本质</span>,
+      the Chinese word for essence.
+      We study the world as it truly is, before any approximation is made.
+    </p>
+  </div>
+
   <div class="hero-ctas">
     <a href="#research" class="btn btn-primary">Our Research</a>
     <a href="#publications" class="btn btn-outline">Publications</a>
@@ -386,7 +422,6 @@
 
       <div class="vis-card" id="vc-raw">
         <svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg">
-          <!-- Bayer sensor pattern -->
           <defs>
             <radialGradient id="glow-r" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stop-color="#e05a4a" stop-opacity="0.7"/>
@@ -401,9 +436,7 @@
               <stop offset="100%" stop-color="#4a8be0" stop-opacity="0"/>
             </radialGradient>
           </defs>
-          <!-- Grid of Bayer cells -->
           <g opacity="0.85">
-            <!-- Row pattern: R G R G / G B G B -->
             <rect x="10" y="15" width="22" height="22" rx="2" fill="#e05a4a" opacity="0.75"/>
             <rect x="36" y="15" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.75"/>
             <rect x="62" y="15" width="22" height="22" rx="2" fill="#e05a4a" opacity="0.75"/>
@@ -411,7 +444,6 @@
             <rect x="114" y="15" width="22" height="22" rx="2" fill="#e05a4a" opacity="0.55"/>
             <rect x="140" y="15" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.35"/>
             <rect x="166" y="15" width="22" height="22" rx="2" fill="#e05a4a" opacity="0.18"/>
-
             <rect x="10" y="41" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.75"/>
             <rect x="36" y="41" width="22" height="22" rx="2" fill="#4a8be0" opacity="0.75"/>
             <rect x="62" y="41" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.75"/>
@@ -419,20 +451,17 @@
             <rect x="114" y="41" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.55"/>
             <rect x="140" y="41" width="22" height="22" rx="2" fill="#4a8be0" opacity="0.35"/>
             <rect x="166" y="41" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.18"/>
-
             <rect x="10" y="67" width="22" height="22" rx="2" fill="#e05a4a" opacity="0.6"/>
             <rect x="36" y="67" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.6"/>
             <rect x="62" y="67" width="22" height="22" rx="2" fill="#e05a4a" opacity="0.6"/>
             <rect x="88" y="67" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.6"/>
             <rect x="114" y="67" width="22" height="22" rx="2" fill="#e05a4a" opacity="0.4"/>
             <rect x="140" y="67" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.25"/>
-
             <rect x="10" y="93" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.4"/>
             <rect x="36" y="93" width="22" height="22" rx="2" fill="#4a8be0" opacity="0.4"/>
             <rect x="62" y="93" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.4"/>
             <rect x="88" y="93" width="22" height="22" rx="2" fill="#4a8be0" opacity="0.4"/>
           </g>
-          <!-- Label -->
           <text x="110" y="130" text-anchor="middle" fill="#c8a96e" font-size="9" font-family="DM Mono, monospace" letter-spacing="2">RAW SENSOR · BAYER PATTERN</text>
         </svg>
         <div class="vis-label">Physics-Based Vision</div>
@@ -447,26 +476,21 @@
               <stop offset="100%" stop-color="#c8a96e" stop-opacity="0"/>
             </radialGradient>
           </defs>
-          <!-- 3D point cloud style visualization -->
           <ellipse cx="110" cy="68" rx="80" ry="50" fill="url(#orb)"/>
-          <!-- Camera frustums -->
           <g stroke="#5b8fd4" stroke-width="0.8" fill="none" opacity="0.7">
             <polygon points="30,100 10,80 50,80" fill="#5b8fd4" fill-opacity="0.12"/>
             <line x1="30" y1="100" x2="10" y2="80"/>
             <line x1="30" y1="100" x2="50" y2="80"/>
             <line x1="10" y1="80" x2="50" y2="80"/>
-
             <polygon points="190,100 170,80 210,80" fill="#5b8fd4" fill-opacity="0.12"/>
             <line x1="190" y1="100" x2="170" y2="80"/>
             <line x1="190" y1="100" x2="210" y2="80"/>
             <line x1="170" y1="80" x2="210" y2="80"/>
-
             <polygon points="110,110 90,90 130,90" fill="#5b8fd4" fill-opacity="0.15"/>
             <line x1="110" y1="110" x2="90" y2="90"/>
             <line x1="110" y1="110" x2="130" y2="90"/>
             <line x1="90" y1="90" x2="130" y2="90"/>
           </g>
-          <!-- Scene points -->
           <g fill="#c8a96e">
             <circle cx="80" cy="55" r="2.5" opacity="0.9"/>
             <circle cx="95" cy="45" r="2" opacity="0.8"/>
@@ -480,7 +504,6 @@
             <circle cx="148" cy="45" r="1.5" opacity="0.4"/>
             <circle cx="72" cy="62" r="1.5" opacity="0.4"/>
           </g>
-          <!-- Ray lines from cameras to scene -->
           <g stroke="#c8a96e" stroke-width="0.5" opacity="0.25">
             <line x1="30" y1="100" x2="110" y2="50"/>
             <line x1="190" y1="100" x2="110" y2="50"/>
@@ -501,33 +524,25 @@
             </radialGradient>
           </defs>
           <ellipse cx="110" cy="70" rx="70" ry="45" fill="url(#glow-ai)"/>
-          <!-- Robot/embodied agent outline -->
           <g stroke="#9b7fe8" stroke-width="1" fill="none" opacity="0.8">
-            <!-- Body -->
             <rect x="85" y="55" width="50" height="40" rx="4" stroke="#9b7fe8" fill="#9b7fe8" fill-opacity="0.07"/>
-            <!-- Head -->
             <rect x="92" y="38" width="36" height="24" rx="4" stroke="#9b7fe8" fill="#9b7fe8" fill-opacity="0.1"/>
-            <!-- Eyes -->
             <circle cx="103" cy="50" r="4" fill="#9b7fe8" fill-opacity="0.6" stroke="none"/>
             <circle cx="117" cy="50" r="4" fill="#9b7fe8" fill-opacity="0.6" stroke="none"/>
             <circle cx="103" cy="50" r="2" fill="#fff" fill-opacity="0.9" stroke="none"/>
             <circle cx="117" cy="50" r="2" fill="#fff" fill-opacity="0.9" stroke="none"/>
-            <!-- Arms -->
             <line x1="85" y1="62" x2="68" y2="75"/>
             <line x1="68" y1="75" x2="60" y2="88"/>
             <line x1="135" y1="62" x2="152" y2="75"/>
             <line x1="152" y1="75" x2="160" y2="88"/>
-            <!-- Legs -->
             <line x1="100" y1="95" x2="95" y2="115"/>
             <line x1="120" y1="95" x2="125" y2="115"/>
           </g>
-          <!-- Camera icon on chest -->
           <g transform="translate(97,62)">
             <rect width="26" height="18" rx="2" fill="none" stroke="#c8a96e" stroke-width="1" opacity="0.8"/>
             <circle cx="13" cy="9" r="5" fill="none" stroke="#c8a96e" stroke-width="1" opacity="0.8"/>
             <circle cx="13" cy="9" r="2.5" fill="#c8a96e" opacity="0.6"/>
           </g>
-          <!-- Signal waves from camera -->
           <g stroke="#c8a96e" stroke-width="0.7" fill="none" opacity="0.4">
             <path d="M 70 71 Q 80 65 90 71"/>
             <path d="M 65 75 Q 77 64 90 75"/>
@@ -641,7 +656,6 @@
         <div class="pub-authors">Jiayi Li, Yuxan Hu, Haoran Geng, Xiangyu Chen, Chuhao Zhou, <strong>Ziteng Cui</strong>, Jianfei Yang</div>
       </div>
     </div>
-    
 
     <div class="pub-item">
       <div class="pub-venue">CVPR<br>2026</div>
@@ -658,7 +672,7 @@
         <div class="pub-authors">Yang Cheng, <strong>Ziteng Cui#</strong>, Lin Gu, Shenghan Su, Zenghui Zhang.</div>
       </div>
     </div>
-    
+
     <div class="pub-item">
       <div class="pub-venue">CVPR<br>2025</div>
       <div>
@@ -690,7 +704,7 @@
         <div class="pub-authors">Xuangeng Chu, Nabarun Goswami, <strong>Ziteng Cui</strong>, Hanqin Wang, Tatsuya Harada</div>
       </div>
     </div>
-    
+
     <div class="pub-item">
       <div class="pub-venue">ECCV<br>2024</div>
       <div>
@@ -706,7 +720,7 @@
         <div class="pub-authors"><strong>Ziteng Cui</strong>, Lin Gu, Tatsuya Harada</div>
       </div>
     </div>
-    
+
     <div class="pub-item">
       <div class="pub-venue">AAAI<br>2024</div>
       <div>
@@ -722,7 +736,7 @@
         <div class="pub-authors">Renrui Zhang, Han Qiu, Tai Wang, Ziyu Guo, <strong>Ziteng Cui</strong>, Yu Qiao, Hongsheng Li, Peng Gao</div>
       </div>
     </div>
-    
+
     <div class="pub-item">
       <div class="pub-venue">BMVC<br>2022</div>
       <div>
@@ -742,13 +756,13 @@
     <div class="pub-item">
       <div class="pub-venue">ICCV<br>2021</div>
       <div>
-        <div class="pub-title">	Multitask AET with Orthogonal Tangent Regularity for Dark Object Detection <span style="color:var(--accent);font-size:0.78rem">★ Most Cited Paper of BMVC 2022</span></div>
+        <div class="pub-title">Multitask AET with Orthogonal Tangent Regularity for Dark Object Detection <span style="color:var(--accent);font-size:0.78rem">★ Most Cited Paper of BMVC 2022</span></div>
         <div class="pub-authors"><strong>Ziteng Cui</strong>, Guo-Jun Qi, Lin Gu, Shaodi You, Zenghui Zhang, Tatsuya Harada</div>
       </div>
     </div>
 
   </div>
-  <div style="margin-top:2rem; reveal">
+  <div style="margin-top:2rem;">
     <a href="https://scholar.google.com/citations?user=niXIRXgAAAAJ&hl=en" class="btn btn-outline" target="_blank">Full publication list →</a>
   </div>
 </section>
@@ -803,8 +817,8 @@
   <div class="contact-grid reveal">
     <div class="contact-text">
       <p>
-        RAW Lab is located at the Thrust of Artificial Intelligence, 
-        Hong Kong University of Science and Technology (Guangzhou) — 
+        RAW Lab is located at the Thrust of Artificial Intelligence,
+        Hong Kong University of Science and Technology (Guangzhou) —
         one of the fastest-growing research universities in the Greater Bay Area.
       </p>
       <p>
