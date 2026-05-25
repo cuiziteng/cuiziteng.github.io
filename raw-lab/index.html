@@ -8,9 +8,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --black: #0a0a0a;
-    --dark: #111214;
-    --card: #16181c;
+    --black: #14161d;
+    --dark: #1b1e27;
+    --card: #1f2330;
     --border: rgba(255,255,255,0.07);
     --accent: #c8a96e;
     --accent2: #5b8fd4;
@@ -144,10 +144,31 @@
   }
   .divider { width: 100%; height: 1px; background: var(--border); }
 
+  /* ── VISUAL CARDS ── */
+  .visual-cards {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem;
+  }
+  .vis-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 6px; padding: 1.5rem 1.25rem 1.25rem;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: default;
+  }
+  .vis-card:hover {
+    border-color: rgba(200,169,110,0.3);
+    transform: translateY(-3px);
+  }
+  .vis-card svg { width: 100%; height: auto; margin-bottom: 0.75rem; }
+  .vis-label {
+    font-family: var(--serif); font-size: 1rem; font-weight: 600;
+    margin-bottom: 0.3rem; color: var(--text);
+  }
+  .vis-sub { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
+
   /* ── ABOUT ── */
   #about { max-width: 1200px; margin: 0 auto; }
   .about-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+    display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: start;
   }
   .about-text p { color: var(--muted); font-size: 1rem; margin-bottom: 1.25rem; line-height: 1.85; }
   .about-text p strong { color: var(--text); font-weight: 500; }
@@ -306,7 +327,7 @@
 
   <div class="hero-tag">Robust AI in the Wild Lab · HKUST(GZ) · AI Thrust</div>
   <h1 class="hero-title">
-    Physics-Based Vision<br>meets <em>Physical AI</em>
+    RAW Lab<br><em>@ HKUST-GZ</em>
   </h1>
   <p class="hero-sub">
     We sit at the intersection of <strong>physics-based vision</strong>,
@@ -352,23 +373,162 @@
         for embodied and autonomous systems.
       </p>
     </div>
-    <div class="about-stats">
-      <div class="stat-box">
-        <div class="stat-num">1,454</div>
-        <div class="stat-label">Total Citations</div>
+    <div class="visual-cards">
+
+      <div class="vis-card" id="vc-raw">
+        <svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg">
+          <!-- Bayer sensor pattern -->
+          <defs>
+            <radialGradient id="glow-r" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#e05a4a" stop-opacity="0.7"/>
+              <stop offset="100%" stop-color="#e05a4a" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="glow-g" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#5ab87a" stop-opacity="0.7"/>
+              <stop offset="100%" stop-color="#5ab87a" stop-opacity="0"/>
+            </radialGradient>
+            <radialGradient id="glow-b" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#4a8be0" stop-opacity="0.7"/>
+              <stop offset="100%" stop-color="#4a8be0" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <!-- Grid of Bayer cells -->
+          <g opacity="0.85">
+            <!-- Row pattern: R G R G / G B G B -->
+            <rect x="10" y="15" width="22" height="22" rx="2" fill="#e05a4a" opacity="0.75"/>
+            <rect x="36" y="15" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.75"/>
+            <rect x="62" y="15" width="22" height="22" rx="2" fill="#e05a4a" opacity="0.75"/>
+            <rect x="88" y="15" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.75"/>
+            <rect x="114" y="15" width="22" height="22" rx="2" fill="#e05a4a" opacity="0.55"/>
+            <rect x="140" y="15" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.35"/>
+            <rect x="166" y="15" width="22" height="22" rx="2" fill="#e05a4a" opacity="0.18"/>
+
+            <rect x="10" y="41" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.75"/>
+            <rect x="36" y="41" width="22" height="22" rx="2" fill="#4a8be0" opacity="0.75"/>
+            <rect x="62" y="41" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.75"/>
+            <rect x="88" y="41" width="22" height="22" rx="2" fill="#4a8be0" opacity="0.75"/>
+            <rect x="114" y="41" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.55"/>
+            <rect x="140" y="41" width="22" height="22" rx="2" fill="#4a8be0" opacity="0.35"/>
+            <rect x="166" y="41" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.18"/>
+
+            <rect x="10" y="67" width="22" height="22" rx="2" fill="#e05a4a" opacity="0.6"/>
+            <rect x="36" y="67" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.6"/>
+            <rect x="62" y="67" width="22" height="22" rx="2" fill="#e05a4a" opacity="0.6"/>
+            <rect x="88" y="67" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.6"/>
+            <rect x="114" y="67" width="22" height="22" rx="2" fill="#e05a4a" opacity="0.4"/>
+            <rect x="140" y="67" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.25"/>
+
+            <rect x="10" y="93" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.4"/>
+            <rect x="36" y="93" width="22" height="22" rx="2" fill="#4a8be0" opacity="0.4"/>
+            <rect x="62" y="93" width="22" height="22" rx="2" fill="#5ab87a" opacity="0.4"/>
+            <rect x="88" y="93" width="22" height="22" rx="2" fill="#4a8be0" opacity="0.4"/>
+          </g>
+          <!-- Label -->
+          <text x="110" y="130" text-anchor="middle" fill="#c8a96e" font-size="9" font-family="DM Mono, monospace" letter-spacing="2">RAW SENSOR · BAYER PATTERN</text>
+        </svg>
+        <div class="vis-label">Physics-Based Vision</div>
+        <div class="vis-sub">RAW sensor understanding & camera-native AI</div>
       </div>
-      <div class="stat-box">
-        <div class="stat-num">9</div>
-        <div class="stat-label">First-author Papers</div>
+
+      <div class="vis-card" id="vc-3d">
+        <svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="orb" cx="50%" cy="40%" r="55%">
+              <stop offset="0%" stop-color="#c8a96e" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#c8a96e" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <!-- 3D point cloud style visualization -->
+          <ellipse cx="110" cy="68" rx="80" ry="50" fill="url(#orb)"/>
+          <!-- Camera frustums -->
+          <g stroke="#5b8fd4" stroke-width="0.8" fill="none" opacity="0.7">
+            <polygon points="30,100 10,80 50,80" fill="#5b8fd4" fill-opacity="0.12"/>
+            <line x1="30" y1="100" x2="10" y2="80"/>
+            <line x1="30" y1="100" x2="50" y2="80"/>
+            <line x1="10" y1="80" x2="50" y2="80"/>
+
+            <polygon points="190,100 170,80 210,80" fill="#5b8fd4" fill-opacity="0.12"/>
+            <line x1="190" y1="100" x2="170" y2="80"/>
+            <line x1="190" y1="100" x2="210" y2="80"/>
+            <line x1="170" y1="80" x2="210" y2="80"/>
+
+            <polygon points="110,110 90,90 130,90" fill="#5b8fd4" fill-opacity="0.15"/>
+            <line x1="110" y1="110" x2="90" y2="90"/>
+            <line x1="110" y1="110" x2="130" y2="90"/>
+            <line x1="90" y1="90" x2="130" y2="90"/>
+          </g>
+          <!-- Scene points -->
+          <g fill="#c8a96e">
+            <circle cx="80" cy="55" r="2.5" opacity="0.9"/>
+            <circle cx="95" cy="45" r="2" opacity="0.8"/>
+            <circle cx="110" cy="50" r="3" opacity="1"/>
+            <circle cx="125" cy="42" r="2" opacity="0.8"/>
+            <circle cx="140" cy="58" r="2.5" opacity="0.7"/>
+            <circle cx="100" cy="65" r="1.8" opacity="0.7"/>
+            <circle cx="118" cy="68" r="2" opacity="0.6"/>
+            <circle cx="132" cy="48" r="1.5" opacity="0.5"/>
+            <circle cx="88" cy="70" r="1.5" opacity="0.5"/>
+            <circle cx="148" cy="45" r="1.5" opacity="0.4"/>
+            <circle cx="72" cy="62" r="1.5" opacity="0.4"/>
+          </g>
+          <!-- Ray lines from cameras to scene -->
+          <g stroke="#c8a96e" stroke-width="0.5" opacity="0.25">
+            <line x1="30" y1="100" x2="110" y2="50"/>
+            <line x1="190" y1="100" x2="110" y2="50"/>
+            <line x1="110" y1="110" x2="110" y2="50"/>
+          </g>
+          <text x="110" y="130" text-anchor="middle" fill="#c8a96e" font-size="9" font-family="DM Mono, monospace" letter-spacing="2">3D NEURAL REPRESENTATIONS</text>
+        </svg>
+        <div class="vis-label">Computational Photography</div>
+        <div class="vis-sub">Illumination-adaptive NeRF & 3D Gaussian Splatting</div>
       </div>
-      <div class="stat-box">
-        <div class="stat-num">1,100+</div>
-        <div class="stat-label">GitHub Stars</div>
+
+      <div class="vis-card" id="vc-ai">
+        <svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="glow-ai" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#9b7fe8" stop-opacity="0.2"/>
+              <stop offset="100%" stop-color="#9b7fe8" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <ellipse cx="110" cy="70" rx="70" ry="45" fill="url(#glow-ai)"/>
+          <!-- Robot/embodied agent outline -->
+          <g stroke="#9b7fe8" stroke-width="1" fill="none" opacity="0.8">
+            <!-- Body -->
+            <rect x="85" y="55" width="50" height="40" rx="4" stroke="#9b7fe8" fill="#9b7fe8" fill-opacity="0.07"/>
+            <!-- Head -->
+            <rect x="92" y="38" width="36" height="24" rx="4" stroke="#9b7fe8" fill="#9b7fe8" fill-opacity="0.1"/>
+            <!-- Eyes -->
+            <circle cx="103" cy="50" r="4" fill="#9b7fe8" fill-opacity="0.6" stroke="none"/>
+            <circle cx="117" cy="50" r="4" fill="#9b7fe8" fill-opacity="0.6" stroke="none"/>
+            <circle cx="103" cy="50" r="2" fill="#fff" fill-opacity="0.9" stroke="none"/>
+            <circle cx="117" cy="50" r="2" fill="#fff" fill-opacity="0.9" stroke="none"/>
+            <!-- Arms -->
+            <line x1="85" y1="62" x2="68" y2="75"/>
+            <line x1="68" y1="75" x2="60" y2="88"/>
+            <line x1="135" y1="62" x2="152" y2="75"/>
+            <line x1="152" y1="75" x2="160" y2="88"/>
+            <!-- Legs -->
+            <line x1="100" y1="95" x2="95" y2="115"/>
+            <line x1="120" y1="95" x2="125" y2="115"/>
+          </g>
+          <!-- Camera icon on chest -->
+          <g transform="translate(97,62)">
+            <rect width="26" height="18" rx="2" fill="none" stroke="#c8a96e" stroke-width="1" opacity="0.8"/>
+            <circle cx="13" cy="9" r="5" fill="none" stroke="#c8a96e" stroke-width="1" opacity="0.8"/>
+            <circle cx="13" cy="9" r="2.5" fill="#c8a96e" opacity="0.6"/>
+          </g>
+          <!-- Signal waves from camera -->
+          <g stroke="#c8a96e" stroke-width="0.7" fill="none" opacity="0.4">
+            <path d="M 70 71 Q 80 65 90 71"/>
+            <path d="M 65 75 Q 77 64 90 75"/>
+          </g>
+          <text x="110" y="130" text-anchor="middle" fill="#c8a96e" font-size="9" font-family="DM Mono, monospace" letter-spacing="2">PHYSICAL AI · EMBODIED SYSTEMS</text>
+        </svg>
+        <div class="vis-label">Physical AI</div>
+        <div class="vis-sub">Camera co-design for robotics & autonomous systems</div>
       </div>
-      <div class="stat-box">
-        <div class="stat-num">3</div>
-        <div class="stat-label">Workshops Organized</div>
-      </div>
+
     </div>
   </div>
 </section>
