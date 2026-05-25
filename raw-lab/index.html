@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAW Lab — Robust AI in the Wild</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --dark: #111214;
+    --card: #16181c;
+    --border: rgba(255,255,255,0.07);
+    --accent: #c8a96e;
+    --accent2: #5b8fd4;
+    --text: #e8e6e0;
+    --muted: #7a7872;
+    --serif: 'Playfair Display', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    opacity: 0.4;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.25rem 4rem;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: var(--mono); font-size: 0.85rem; letter-spacing: 0.12em;
+    color: var(--accent); text-decoration: none;
+  }
+  .nav-logo span { color: var(--muted); }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none; font-size: 0.82rem;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; flex-direction: column;
+    justify-content: flex-end; padding: 0 4rem 6rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 80% 30%, rgba(91,143,212,0.06) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 50% at 20% 70%, rgba(200,169,110,0.05) 0%, transparent 60%);
+  }
+  /* Bayer pattern decoration */
+  .bayer {
+    position: absolute; top: 12%; right: 6%; z-index: 0;
+    opacity: 0.07; width: 240px; height: 240px;
+    display: grid; grid-template-columns: repeat(8,1fr); gap: 3px;
+  }
+  .bayer-cell {
+    border-radius: 2px;
+    animation: blink 4s infinite;
+  }
+  .bayer-cell.r { background: #c0392b; animation-delay: calc(var(--i)*0.15s); }
+  .bayer-cell.g { background: #27ae60; animation-delay: calc(var(--i)*0.1s); }
+  .bayer-cell.b { background: #2980b9; animation-delay: calc(var(--i)*0.2s); }
+  @keyframes blink {
+    0%,100% { opacity:1; } 50% { opacity:0.3; }
+  }
+  .hero-tag {
+    font-family: var(--mono); font-size: 0.78rem; color: var(--accent);
+    letter-spacing: 0.15em; text-transform: uppercase;
+    margin-bottom: 1.5rem; position: relative; z-index: 1;
+  }
+  .hero-title {
+    font-family: var(--serif); font-size: clamp(3.5rem, 7vw, 6.5rem);
+    font-weight: 600; line-height: 1.05; position: relative; z-index: 1;
+    max-width: 820px;
+  }
+  .hero-title em { font-style: normal; color: var(--accent); }
+  .hero-sub {
+    margin-top: 1.75rem; font-size: 1.05rem; color: var(--muted);
+    max-width: 540px; position: relative; z-index: 1; line-height: 1.8;
+  }
+  .hero-ctas {
+    margin-top: 2.5rem; display: flex; gap: 1rem; position: relative; z-index: 1;
+  }
+  .btn {
+    display: inline-block; padding: 0.75rem 1.8rem;
+    font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase;
+    text-decoration: none; border-radius: 2px; transition: all 0.2s;
+    font-family: var(--mono);
+  }
+  .btn-primary {
+    background: var(--accent); color: var(--black);
+  }
+  .btn-primary:hover { background: #dfc087; }
+  .btn-outline {
+    border: 1px solid var(--border); color: var(--muted);
+  }
+  .btn-outline:hover { border-color: var(--muted); color: var(--text); }
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  }
+  .hero-scroll span { font-size: 0.7rem; color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; }
+  .scroll-line {
+    width: 1px; height: 48px; background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrolldown 2s ease-in-out infinite;
+  }
+  @keyframes scrolldown { 0%,100%{transform:scaleY(1);opacity:1} 50%{transform:scaleY(0.4);opacity:0.3} }
+
+  /* ── SECTIONS ── */
+  section { padding: 7rem 4rem; position: relative; z-index: 1; }
+  .section-label {
+    font-family: var(--mono); font-size: 0.72rem; color: var(--accent);
+    letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 600; line-height: 1.15; margin-bottom: 3rem;
+  }
+  .divider { width: 100%; height: 1px; background: var(--border); }
+
+  /* ── ABOUT ── */
+  #about { max-width: 1200px; margin: 0 auto; }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+  }
+  .about-text p { color: var(--muted); font-size: 1rem; margin-bottom: 1.25rem; line-height: 1.85; }
+  .about-text p strong { color: var(--text); font-weight: 500; }
+  .about-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+  }
+  .stat-box {
+    background: var(--card); border: 1px solid var(--border);
+    padding: 1.5rem; border-radius: 4px;
+  }
+  .stat-num { font-family: var(--serif); font-size: 2.4rem; color: var(--accent); line-height: 1; }
+  .stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.4rem; text-transform: uppercase; letter-spacing: 0.07em; }
+
+  /* ── RESEARCH ── */
+  #research { background: var(--dark); }
+  .research-inner { max-width: 1200px; margin: 0 auto; }
+  .research-grid {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5px;
+    background: var(--border); border: 1px solid var(--border);
+  }
+  .research-card {
+    background: var(--dark); padding: 2.5rem 2rem;
+    transition: background 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .research-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--accent); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .research-card:hover { background: var(--card); }
+  .research-card:hover::before { transform: scaleX(1); }
+  .research-icon {
+    font-size: 1.6rem; margin-bottom: 1.25rem; display: block;
+  }
+  .research-card h3 {
+    font-family: var(--serif); font-size: 1.15rem; margin-bottom: 0.75rem; line-height: 1.3;
+  }
+  .research-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.75; }
+  .research-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.25rem; }
+  .tag {
+    font-family: var(--mono); font-size: 0.68rem; padding: 0.2rem 0.6rem;
+    border: 1px solid var(--border); color: var(--muted); border-radius: 2px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── PUBLICATIONS ── */
+  #publications { max-width: 1200px; margin: 0 auto; }
+  .pub-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .pub-item {
+    background: var(--black); padding: 1.75rem 2rem;
+    display: grid; grid-template-columns: 120px 1fr auto;
+    gap: 1.5rem; align-items: start;
+    transition: background 0.2s;
+  }
+  .pub-item:hover { background: var(--card); }
+  .pub-venue {
+    font-family: var(--mono); font-size: 0.72rem; color: var(--accent2);
+    letter-spacing: 0.08em; padding-top: 0.2rem; text-align: right;
+  }
+  .pub-title { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.3rem; line-height: 1.45; }
+  .pub-authors { font-size: 0.82rem; color: var(--muted); }
+  .pub-authors strong { color: var(--accent); font-weight: 500; }
+  .pub-links { display: flex; gap: 0.5rem; padding-top: 0.2rem; }
+  .pub-link {
+    font-family: var(--mono); font-size: 0.68rem; padding: 0.25rem 0.6rem;
+    border: 1px solid var(--border); color: var(--muted); text-decoration: none;
+    border-radius: 2px; transition: all 0.15s; white-space: nowrap;
+  }
+  .pub-link:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* ── PEOPLE ── */
+  #people { background: var(--dark); }
+  .people-inner { max-width: 1200px; margin: 0 auto; }
+  .pi-card {
+    display: grid; grid-template-columns: 200px 1fr; gap: 3rem;
+    background: var(--card); border: 1px solid var(--border);
+    padding: 2.5rem; border-radius: 4px; margin-bottom: 3rem;
+  }
+  .pi-photo {
+    width: 200px; height: 200px; border-radius: 3px;
+    background: linear-gradient(135deg, #1a1f2e, #0d1117);
+    border: 1px solid var(--border); display: flex; align-items: center;
+    justify-content: center; overflow: hidden;
+  }
+  .pi-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .pi-photo-placeholder {
+    font-size: 4rem; opacity: 0.15;
+  }
+  .pi-name { font-family: var(--serif); font-size: 1.8rem; margin-bottom: 0.25rem; }
+  .pi-role { font-family: var(--mono); font-size: 0.78rem; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 1rem; }
+  .pi-bio { font-size: 0.9rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.25rem; }
+  .pi-links { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+
+  /* ── CONTACT ── */
+  #contact { max-width: 1200px; margin: 0 auto; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; }
+  .contact-text p { color: var(--muted); font-size: 0.95rem; line-height: 1.85; margin-bottom: 1.25rem; }
+  .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+    padding: 1.25rem 1.5rem; background: var(--card);
+    border: 1px solid var(--border); border-radius: 3px;
+  }
+  .contact-item-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .contact-item-label { font-family: var(--mono); font-size: 0.68rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.2rem; }
+  .contact-item-val { font-size: 0.88rem; color: var(--text); }
+  .contact-item-val a { color: var(--accent2); text-decoration: none; }
+  .contact-item-val a:hover { text-decoration: underline; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2.5rem 4rem; border-top: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+    position: relative; z-index: 1;
+  }
+  footer p { font-size: 0.78rem; color: var(--muted); font-family: var(--mono); }
+
+  /* ── ANIMATIONS ── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 1.5rem; }
+    .hero { padding: 0 1.5rem 5rem; }
+    .about-grid, .contact-grid, .pi-card { grid-template-columns: 1fr; gap: 2rem; }
+    .research-grid { grid-template-columns: 1fr; }
+    .pub-item { grid-template-columns: 1fr; }
+    .pub-venue { text-align: left; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">RAW<span>/lab</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#people">People</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+
+  <!-- Bayer pattern decoration -->
+  <div class="bayer" id="bayer"></div>
+
+  <div class="hero-tag">Robust AI in the Wild Lab · HKUST(GZ) · AI Thrust</div>
+  <h1 class="hero-title">
+    Physics-Based Vision<br>meets <em>Physical AI</em>
+  </h1>
+  <p class="hero-sub">
+    We sit at the intersection of <strong>physics-based vision</strong>,
+    <strong>computational photography</strong>, and <strong>physical AI</strong> —
+    building systems that perceive, reconstruct, and interact with
+    the physical world grounded in the principles of light and imaging.
+  </p>
+  <div class="hero-ctas">
+    <a href="#research" class="btn btn-primary">Our Research</a>
+    <a href="#publications" class="btn btn-outline">Publications</a>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <div class="section-label">Who We Are</div>
+    <h2 class="section-title">Physics-grounded vision<br>for the real world</h2>
+  </div>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>
+        The <strong>RAW Lab (Robust AI in the Wild)</strong> is a research group at the
+        Thrust of Artificial Intelligence,
+        Hong Kong University of Science and Technology (Guangzhou),
+        led by <strong>Dr. Ziteng Cui</strong>.
+      </p>
+      <p>
+        We sit at the intersection of <strong>physics-based vision</strong>,
+        <strong>computational photography</strong>, and <strong>physical AI</strong>.
+        Rather than treating the imaging pipeline as a black box, we model light transport,
+        sensor physics, and scene geometry as learnable, differentiable systems — enabling
+        AI that is robust, interpretable, and deployable in the real world.
+      </p>
+      <p>
+        Our work spans illumination-adaptive 3D reconstruction, RAW-native perception,
+        physics-informed inverse rendering, and co-designing intelligent cameras
+        for embodied and autonomous systems.
+      </p>
+    </div>
+    <div class="about-stats">
+      <div class="stat-box">
+        <div class="stat-num">1,454</div>
+        <div class="stat-label">Total Citations</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">9</div>
+        <div class="stat-label">First-author Papers</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">1,100+</div>
+        <div class="stat-label">GitHub Stars</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Workshops Organized</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- RESEARCH -->
+<section id="research">
+  <div class="research-inner">
+    <div class="reveal">
+      <div class="section-label">Research Directions</div>
+      <h2 class="section-title">What we work on</h2>
+    <p style="color:var(--muted);font-size:0.95rem;max-width:680px;margin-bottom:2.5rem;line-height:1.8;">Our work lives at the crossroads of three fields — using the physics of imaging as the bridge between visual understanding and intelligent physical interaction.</p>
+    </div>
+    <div class="research-grid reveal">
+      <div class="research-card">
+        <span class="research-icon">🌒</span>
+        <h3>Physics-Aware 3D Neural Representations</h3>
+        <p>Extending NeRF and 3DGS to handle variable illumination, participating media, and real-world degradation through physics-grounded formulations.</p>
+        <div class="research-tags">
+          <span class="tag">NeRF</span>
+          <span class="tag">3D Gaussian Splatting</span>
+          <span class="tag">Inverse Rendering</span>
+          <span class="tag">Digital Twins</span>
+        </div>
+      </div>
+      <div class="research-card">
+        <span class="research-icon">📷</span>
+        <h3>Camera-Native Perception & RAW Vision</h3>
+        <p>Building differentiable pipelines from raw sensor data to high-level tasks, bypassing human-centric ISPs to preserve physically rich photometric information.</p>
+        <div class="research-tags">
+          <span class="tag">RAW Sensor</span>
+          <span class="tag">ISP</span>
+          <span class="tag">Computational Photography</span>
+        </div>
+      </div>
+      <div class="research-card">
+        <span class="research-icon">🤖</span>
+        <h3>AI for Next-Generation Camera Design</h3>
+        <p>Co-designing optics, sensors, and algorithms to produce machine-optimal visual data for robotics, autonomous driving, and embodied intelligence.</p>
+        <div class="research-tags">
+          <span class="tag">Embodied AI</span>
+          <span class="tag">Camera Co-design</span>
+          <span class="tag">Robustness</span>
+        </div>
+      </div>
+      <div class="research-card">
+        <span class="research-icon">⚗️</span>
+        <h3>Physics-Guided Generative Models</h3>
+        <p>Integrating optical and geometric priors into generative AI to synthesize physically consistent scenes and enable high-quality synthetic data engines.</p>
+        <div class="research-tags">
+          <span class="tag">Simulation</span>
+          <span class="tag">Data Engine</span>
+          <span class="tag">World Models</span>
+        </div>
+      </div>
+      <div class="research-card">
+        <span class="research-icon">🔬</span>
+        <h3>Solving Inverse Problems in Imaging</h3>
+        <p>Recovering intrinsic physical scene properties from images — albedo, shading, depth, material — for scientific, medical, and industrial applications.</p>
+        <div class="research-tags">
+          <span class="tag">Inverse Problems</span>
+          <span class="tag">Scene Understanding</span>
+          <span class="tag">Remote Sensing</span>
+        </div>
+      </div>
+      <div class="research-card">
+        <span class="research-icon">📊</span>
+        <h3>Physically Degraded Benchmarks</h3>
+        <p>Creating evaluation frameworks that reflect real-world sensor degradation, including the RealX3D benchmark for multi-view 3D restoration and reconstruction.</p>
+        <div class="research-tags">
+          <span class="tag">RealX3D</span>
+          <span class="tag">Benchmark</span>
+          <span class="tag">3D Reconstruction</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-label reveal">Selected Publications</div>
+  <h2 class="section-title reveal">Recent work</h2>
+  <div class="pub-list reveal">
+
+    <div class="pub-item">
+      <div class="pub-venue">T-PAMI<br>2026</div>
+      <div>
+        <div class="pub-title">RAW-Adapter: Adapting Pre-trained Visual Models to Camera RAW Images and A Benchmark</div>
+        <div class="pub-authors"><strong>Ziteng Cui</strong>, Jianfei Yang, Tatsuya Harada</div>
+      </div>
+      <div class="pub-links">
+        <a href="https://github.com/cuiziteng/ECCV_RAW_Adapter" class="pub-link">Code</a>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-venue">CVPR<br>2025</div>
+      <div>
+        <div class="pub-title">Luminance-GS: Adapting 3D Gaussian Splatting to Challenging Lighting Conditions with View-Adaptive Curve Adjustment</div>
+        <div class="pub-authors"><strong>Ziteng Cui</strong>, Xuangeng Chu, Tatsuya Harada</div>
+      </div>
+      <div class="pub-links">
+        <a href="https://github.com/cuiziteng/Luminance-GS" class="pub-link">Code</a>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-venue">NeurIPS<br>2025</div>
+      <div>
+        <div class="pub-title">Dr. RAW: Towards General High-Level Vision from RAW with Efficient Task Conditioning</div>
+        <div class="pub-authors"><strong>Ziteng Cui*</strong>, Wenjun Huang*, Yinqiang Zheng, Tatsuya Harada, Mohsen Imani</div>
+      </div>
+      <div class="pub-links">
+        <a href="#" class="pub-link">Paper</a>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-venue">ECCV<br>2024</div>
+      <div>
+        <div class="pub-title">RAW-Adapter: Adapting Pre-trained Visual Models to Camera RAW Images</div>
+        <div class="pub-authors"><strong>Ziteng Cui</strong>, Tatsuya Harada</div>
+      </div>
+      <div class="pub-links">
+        <a href="https://github.com/cuiziteng/ECCV_RAW_Adapter" class="pub-link">Code</a>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-venue">AAAI<br>2024</div>
+      <div>
+        <div class="pub-title">Aleth-NeRF: Illumination Adaptive NeRF with Concealing Field Assumption</div>
+        <div class="pub-authors"><strong>Ziteng Cui</strong>, Lin Gu, Xiao Sun, Yu Qiao, Tatsuya Harada</div>
+      </div>
+      <div class="pub-links">
+        <a href="https://github.com/cuiziteng/Aleth-NeRF" class="pub-link">Code</a>
+      </div>
+    </div>
+
+    <div class="pub-item">
+      <div class="pub-venue">BMVC<br>2022</div>
+      <div>
+        <div class="pub-title">You Only Need 90K Parameters to Adapt Light: A Light Weight Transformer for Image Enhancement and Exposure Correction <span style="color:var(--accent);font-size:0.78rem">★ Most Cited Paper of BMVC 2022</span></div>
+        <div class="pub-authors"><strong>Ziteng Cui</strong>, Kunchang Li, Lin Gu, Shenghan Su, Peng Gao, Yu Qiao, Tatsuya Harada</div>
+      </div>
+      <div class="pub-links">
+        <a href="https://github.com/cuiziteng/Illumination-Adaptive-Transformer" class="pub-link">Code</a>
+      </div>
+    </div>
+
+  </div>
+  <div style="margin-top:2rem; reveal">
+    <a href="https://scholar.google.com/citations?user=niXIRXgAAAAJ&hl=en" class="btn btn-outline" target="_blank">Full publication list →</a>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PEOPLE -->
+<section id="people">
+  <div class="people-inner">
+    <div class="reveal">
+      <div class="section-label">Team</div>
+      <h2 class="section-title">People</h2>
+    </div>
+    <div class="pi-card reveal">
+      <div class="pi-photo">
+        <div class="pi-photo-placeholder">👤</div>
+      </div>
+      <div>
+        <div class="pi-name">Ziteng Cui</div>
+        <div class="pi-role">Principal Investigator · Project Assistant Professor</div>
+        <p class="pi-bio">
+          Dr. Ziteng Cui is an Assistant Professor at the Thrust of Artificial Intelligence,
+          HKUST(GZ). He received his Ph.D. from the University of Tokyo (2025) under Prof. Tatsuya Harada,
+          where he was awarded the <strong>Dean's Award of the Graduate School of Engineering</strong> —
+          given to the most outstanding graduating student per department.
+          His research sits at the intersection of physics-based vision, computational photography,
+          and physical AI. He has published at CVPR, ECCV, NeurIPS, ICCV, AAAI, T-PAMI,
+          with 1,454 total citations, and organized workshops at CVPR 2026 and BMVC 2025.
+        </p>
+        <div class="pi-links">
+          <a href="https://cuiziteng.github.io" class="btn btn-outline" target="_blank">Homepage</a>
+          <a href="https://scholar.google.com/citations?user=niXIRXgAAAAJ&hl=en" class="btn btn-outline" target="_blank">Google Scholar</a>
+          <a href="https://github.com/cuiziteng" class="btn btn-outline" target="_blank">GitHub</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="reveal" style="background:var(--card);border:1px solid var(--border);padding:2rem;border-radius:4px;text-align:center;">
+      <p style="color:var(--muted);font-size:0.95rem;margin-bottom:1rem;">
+        We are actively looking for motivated PhD students and research interns<br>
+        interested in computational photography, 3D vision, and physics-based AI.
+      </p>
+      <a href="mailto:cui@mi.t.u-tokyo.ac.jp" class="btn btn-primary">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label reveal">Contact</div>
+  <h2 class="section-title reveal">Find us</h2>
+  <div class="contact-grid reveal">
+    <div class="contact-text">
+      <p>
+        RAW Lab is located at the Research Center for Advanced Science and Technology (RCAST),
+        one of Japan's premier interdisciplinary research institutes,
+        at the University of Tokyo.
+      </p>
+      <p>
+        We welcome collaborations from academia and industry.
+        If you are interested in our work or are a prospective student,
+        please reach out by email.
+      </p>
+    </div>
+    <div class="contact-info">
+      <div class="contact-item">
+        <div class="contact-item-icon">✉️</div>
+        <div>
+          <div class="contact-item-label">Email</div>
+          <div class="contact-item-val"><a href="mailto:cui@mi.t.u-tokyo.ac.jp">cui@mi.t.u-tokyo.ac.jp</a></div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">📍</div>
+        <div>
+          <div class="contact-item-label">Address</div>
+          <div class="contact-item-val">Thrust of Artificial Intelligence<br>HKUST(Guangzhou), Nansha, Guangzhou 511458, China</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-icon">🔗</div>
+        <div>
+          <div class="contact-item-label">Web</div>
+          <div class="contact-item-val"><a href="https://cuiziteng.github.io/raw-lab/">cuiziteng.github.io/raw-lab</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 RAW Lab · HKUST(GZ)</p>
+  <p>Built with physics and coffee</p>
+</footer>
+
+<script>
+// Bayer pattern generator
+const bayer = document.getElementById('bayer');
+const pattern = ['r','g','g','b'];
+for(let i=0;i<64;i++){
+  const cell = document.createElement('div');
+  cell.className = 'bayer-cell ' + pattern[i%4];
+  cell.style.setProperty('--i', i);
+  bayer.appendChild(cell);
+}
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if(e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
