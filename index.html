@@ -89,10 +89,10 @@
             <td style="padding:20px;width:100%;vertical-align:middle">
 		    
               <heading>Publications</heading>
-			<p style="margin-top:4px">
+			<!-- <p style="margin-top:4px">
 			  (<a id="link-show-selected" href="javascript:toggle_selected()">show selected</a>
 			  / <a id="link-show-all" href="javascript:toggle_all()">show all</a>)
-			</p>
+			</p> -->
               <p>
                 I'm now interested in the physics modeling in 3D computer vision and camera design, I especially interested in implicit modeling. "*" means authors contribute equally. "#" means corresponding author.
               </p>
@@ -609,13 +609,21 @@
     </tr>
   </table>
 <style>
-  tr.paper { display: table-row; }
-  tr.paper.hidden { display: none; }
-  #link-show-selected { font-weight: bold; }
-  #link-show-all { font-weight: normal; }
+	tr.paper {
+	    display: table-row;
+	}
+	
+	tr.paper.highlight {
+	    background-color: #f5f0ff;   /* 淡紫色 */
+	}
+	
+	tr.paper td {
+	    padding-top: 20px;
+	    padding-bottom: 20px;
+	}
 </style>
 
-<script>
+<!-- <script>
   function toggle_selected() {
     document.querySelectorAll("tr.paper:not(.highlight)").forEach(function(el) {
       el.classList.add("hidden");
@@ -633,7 +641,7 @@
   }
 
   window.onload = function() { toggle_selected(); };
-</script>
+</script> -->
 
 </body>
 
