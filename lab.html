@@ -33,55 +33,93 @@
 
   <section>
     <div class="lab-hero">
-      <h1 class="lab-name">Robust AI in the Wild Lab</h1>
-      <p class="lab-sub">RAW Lab · AI Thrust, HKUST (Guangzhou) · from 2027</p>
+      <h1 class="lab-name">RAW Lab</h1>
+      <p class="lab-sub">Robust AI in the Wild · AI Thrust, HKUST (Guangzhou) · from 2027</p>
       <div class="prose">
         <p>
-          Vision models are trained on clean, processed images. The world does not supply those.
-          Real cameras produce RAW sensor data under mixed illumination, in low light, through
-          scattering media, at the wrong exposure. RAW Lab studies what it takes for perception
-          systems to stay reliable when the imaging conditions stop cooperating — and how knowledge
-          of the physics of image formation can get us there.
+          We sit at the intersection of <strong>computer vision</strong>,
+          <strong>computational photography</strong>, and <strong>physical AI</strong> — building
+          systems that perceive, reconstruct, and interact with the physical world, grounded in the
+          principles of light and imaging.
         </p>
+      </div>
+
+      <div class="triptych">
+        <p class="triptych-lead">RAW is three things at once.</p>
+        <dl>
+          <div>
+            <dt>The signal</dt>
+            <dd>Unprocessed data straight from the camera sensor, before any pipeline touches it.</dd>
+          </div>
+          <div>
+            <dt>Robust AI in the Wild</dt>
+            <dd>Perception that holds up outside the conditions it was trained on.</dd>
+          </div>
+          <div>
+            <dt>本质</dt>
+            <dd>The Chinese word for essence — the world as it truly is, before any approximation is made.</dd>
+          </div>
+        </dl>
       </div>
     </div>
   </section>
 
   <section>
-    <h2 class="sec-head">Research Directions</h2>
+    <h2 class="sec-head">Research Directions <span class="count">including but not limited to</span></h2>
     <div class="topics">
 
       <div class="topic">
-        <h3>Physics-grounded visual perception</h3>
+        <h3>Physics-Aware 3D Neural Representations</h3>
         <p>
-          Bringing sensor physics — RAW signals, noise formation, ISP behaviour — into models that
-          were designed for sRGB. Adapting pre-trained backbones to the data cameras actually produce.
+          Physics-grounded neural representations for 3D reconstruction, rendering, and synthesis —
+          closing the loop between vision and graphics.
         </p>
+        <p class="kw">Radiance Fields · 3D Gaussian Splatting · Inverse Rendering · Digital Twins</p>
       </div>
 
       <div class="topic">
-        <h3>3D vision under degradation</h3>
+        <h3>Robust Computer Vision</h3>
         <p>
-          Reconstruction and novel view synthesis when the input is dark, noisy, hazy, or captured
-          through water. Benchmarks and methods for geometry that survives real imaging conditions.
+          Visual perception that holds up when the world gets hard — across illumination, weather,
+          and the full range of conditions cameras encounter in the wild.
         </p>
+        <p class="kw">Low-level Vision · ISP · Computational Photography</p>
       </div>
 
       <div class="topic">
-        <h3>Computational photography</h3>
+        <h3>Embodied Perception</h3>
         <p>
-          Illumination estimation, white balance, exposure correction, and colour science — with an
-          interest in what vision-language models can contribute to problems traditionally solved by
-          statistics alone.
+          Designing vision systems from the ground up for agents that act in the physical world —
+          where sensing, physics, and decision-making are co-designed as one.
         </p>
+        <p class="kw">Embodied AI · Hardware Co-design · Robustness</p>
       </div>
 
       <div class="topic">
-        <h3>Embodied and Physical AI</h3>
+        <h3>Physics-Guided World Models</h3>
         <p>
-          Perception for robots that operate outside controlled environments, where the gap between
-          simulated observations and real sensor data determines whether a policy transfers.
+          Bringing physical laws into the generative process — where synthesis is not mere appearance
+          but a consequence of how light and matter interact.
         </p>
+        <p class="kw">Simulation · Data Engines · World Models</p>
+      </div>
+
+      <div class="topic">
+        <h3>Inverse Problems in Vision</h3>
+        <p>
+          The world leaves traces in images — we invert that process, recovering the hidden physical
+          causes behind what cameras observe.
+        </p>
+        <p class="kw">Inverse Problems · Scene Understanding · Remote Sensing</p>
+      </div>
+
+      <div class="topic">
+        <h3>Evaluation Beyond Clean Data</h3>
+        <p>
+          Rethinking how we measure progress — benchmarks grounded in real sensor physics, where
+          degradation is not noise to be removed but reality to be understood.
+        </p>
+        <p class="kw">Benchmarks · 3D Reconstruction</p>
       </div>
 
     </div>
