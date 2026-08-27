@@ -348,18 +348,23 @@ section + section { margin-top: 52px; }
 }
 .pub:last-child { border-bottom: none; }
 
+/* Entry with no thumbnail: text takes the full width. */
+.pub:not(:has(.pub-media)) { grid-template-columns: minmax(0, 1fr); }
+
 .pub-media {
+  align-self: start;
   border: 1px solid var(--rule);
   border-radius: 3px;
-  background: var(--paper-alt);
+  background: #fff;
   overflow: hidden;
-  aspect-ratio: 16 / 10;
+  line-height: 0;
 }
 .pub-media img,
 .pub-media video {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  max-height: 260px;
+  object-fit: contain;
   display: block;
 }
 
@@ -507,6 +512,42 @@ section + section { margin-top: 52px; }
   gap: 18px;
   margin-top: 4px;
 }
+
+/* The three readings of RAW */
+.triptych {
+  margin-top: 26px;
+  padding-top: 22px;
+  border-top: 1px solid var(--rule);
+}
+.triptych-lead {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 16px;
+}
+.triptych dl {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 26px;
+  margin: 0;
+}
+.triptych dt {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0 0 6px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--tungsten);
+  display: inline-block;
+}
+.triptych dd {
+  margin: 0;
+  font-size: 0.91rem;
+  line-height: 1.62;
+  color: var(--muted);
+}
 .topic {
   border: 1px solid var(--rule);
   border-radius: 3px;
@@ -525,6 +566,16 @@ section + section { margin-top: 52px; }
   color: var(--muted);
   line-height: 1.65;
   margin: 0;
+}
+.topic .kw {
+  font-family: var(--mono);
+  font-size: 0.71rem;
+  letter-spacing: 0.02em;
+  color: var(--muted-soft);
+  line-height: 1.65;
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px solid var(--rule);
 }
 
 /* ---------- More page ---------- */
@@ -618,6 +669,7 @@ footer a { color: var(--muted); }
 
   .lab-hero { padding: 24px 20px; }
   .lab-name { font-size: 1.5rem; }
+  .triptych dl { grid-template-columns: 1fr; gap: 18px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
