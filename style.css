@@ -368,6 +368,45 @@ section + section { margin-top: 52px; }
   display: block;
 }
 
+/* Hover to reveal the "after" result. The before image sets the box size;
+   the after layer is absolutely positioned on top and fades in. */
+.pub-media.swap { position: relative; }
+.pub-media.swap .after {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity .28s ease;
+}
+.pub-media.swap .after img,
+.pub-media.swap .after video {
+  width: 100%;
+  height: 100%;
+  max-height: none;
+  object-fit: cover;
+}
+.pub:hover .pub-media.swap .after,
+.pub-media.swap:focus-within .after { opacity: 1; }
+
+/* Small affordance so people know there is something to hover. */
+.pub-media.swap::after {
+  content: "hover";
+  position: absolute;
+  right: 6px;
+  bottom: 6px;
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1;
+  color: #fff;
+  background: rgba(20, 22, 26, 0.62);
+  border-radius: 2px;
+  padding: 3px 5px;
+  pointer-events: none;
+  transition: opacity .28s ease;
+}
+.pub:hover .pub-media.swap::after { opacity: 0; }
+
 .pub-title {
   font-size: 1.02rem;
   font-weight: 600;
@@ -458,13 +497,6 @@ section + section { margin-top: 52px; }
 .entries .what { color: var(--ink-soft); }
 .entries .what strong { color: var(--ink); font-weight: 600; }
 .entries .where { color: var(--muted); font-size: 0.9rem; display: block; margin-top: 1px; }
-.entries .talk-title {
-  display: block;
-  margin-top: 3px;
-  font-size: 0.9rem;
-  font-style: italic;
-  color: var(--muted);
-}
 
 .plain-list { list-style: none; margin: 0; padding: 0; font-size: 0.96rem; }
 .plain-list li {
