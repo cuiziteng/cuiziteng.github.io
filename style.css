@@ -545,6 +545,17 @@ section + section { margin-top: 52px; }
   margin: 0 0 18px;
 }
 
+.lab-logo {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  margin: 0 auto 1.5rem;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
 .topics {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
