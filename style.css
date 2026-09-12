@@ -351,38 +351,47 @@ section + section { margin-top: 52px; }
 /* Entry with no thumbnail: text takes the full width. */
 .pub:not(:has(.pub-media)) { grid-template-columns: minmax(0, 1fr); }
 
+/* Fixed-size thumbnail box so every entry's media is the same dimensions.
+   Images are scaled to fit inside (object-fit: contain) — never cropped —
+   and centred, so different aspect ratios just get letter/pillar-boxed. */
 .pub-media {
   align-self: start;
+  width: 196px;
+  height: 150px;
   border: 1px solid var(--rule);
   border-radius: 3px;
   background: #fff;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   line-height: 0;
 }
 .pub-media img,
 .pub-media video {
   width: 100%;
-  height: auto;
-  max-height: 260px;
+  height: 100%;
   object-fit: contain;
   display: block;
 }
 
-/* Hover to reveal the "after" result. The before image sets the box size;
-   the after layer is absolutely positioned on top and fades in. */
+/* Hover to reveal the "after" result. The after layer is absolutely
+   positioned on top of the same fixed box and fades in. */
 .pub-media.swap { position: relative; }
 .pub-media.swap .after {
   position: absolute;
   inset: 0;
   opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: opacity .28s ease;
 }
 .pub-media.swap .after img,
 .pub-media.swap .after video {
   width: 100%;
   height: 100%;
-  max-height: none;
-  object-fit: cover;
+  object-fit: contain;
 }
 .pub:hover .pub-media.swap .after,
 .pub-media.swap:focus-within .after { opacity: 1; }
@@ -713,7 +722,7 @@ footer a { color: var(--muted); }
   .hero-name { font-size: 2rem; }
 
   .pub { grid-template-columns: 1fr; gap: 14px; }
-  .pub-media { max-width: 320px; }
+  .pub-media { width: 100%; max-width: 320px; height: 200px; }
 
   .news li, .entries li { grid-template-columns: 62px minmax(0, 1fr); gap: 12px; }
 
